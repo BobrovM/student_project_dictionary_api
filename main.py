@@ -4,6 +4,8 @@ import pandas as pd
 
 app = Flask(__name__)
 
+df = pd.read_csv("dictionary.csv")
+
 
 @app.route("/")
 def home():
@@ -12,7 +14,6 @@ def home():
 
 @app.route("/api/v1/<word>")
 def give_definition(word):
-    df = pd.read_csv("dictionary.csv")
     definition = df[df["word"] == word]["definition"].item()
 
     return {"definition": definition,
